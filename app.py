@@ -18,4 +18,6 @@ app.register_blueprint(auth_bp)
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    # ✅ Render necesita host=0.0.0.0 y PORT dinámico
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
