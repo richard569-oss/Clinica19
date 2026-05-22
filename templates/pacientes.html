@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lista de Pacientes</h2>
+
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+    </tr>
+    {% for p in pacientes %}
+    <tr>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.edad }}</td>
+        <td>{{ p.direccion }}</td>
+        <td>{{ p.telefono }}</td>
+        <td>
+            <!-- Botones de acción -->
+            <a href="/paciente/editar/{{ p.id_paciente }}">Editar</a> |
+            <a href="/paciente/eliminar/{{ p.id_paciente }}" 
+               onclick="return confirm('¿Seguro que deseas eliminar este paciente?');">
+               Eliminar
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Agregar Nuevo Paciente</h3>
+<form method="POST" action="/paciente/nuevo">
+    <label>Nombre:</label><br>
+    <input type="text" name="nombre" required><br>
+    <label>Edad:</label><br>
+    <input type="number" name="edad" required><br>
+    <label>Dirección:</label><br>
+    <input type="text" name="direccion" required><br>
+    <label>Teléfono:</label><br>
+    <input type="text" name="telefono" required><br><br>
+    <button type="submit">Agregar Paciente</button>
+</form>
+{% endblock %}
