@@ -19,3 +19,23 @@ def nuevo_medico():
     db.session.add(medico)
     db.session.commit()
     return redirect(url_for('medico.listar_medicos'))
+# Editar médico
+@medico_bp.route('/medico/editar/<int:id>', methods=['GET', 'POST'])
+def editar_medico(id):
+    medico = Medico.query.get_or_404(id)
+    if request.method == 'POST':
+        medico.nombre = request.form['nombre']
+        medico.especialidad = request.form['especialidad']
+        medico.telefono = request.form['telefono']
+        medico.correo = request.form['correo']
+        db.session.commit()
+        return redirect(url_for('medico.listar_medicos'))
+    return render_template('editar_medico.html', medico=medico)
+
+# Eliminar médico
+@medico_bp.route('/medico/eliminar/<int:id>', methods=['POST'])
+def eliminar_medico(id):
+    medico = Medico.query.get_or_404(id)
+    db.session.delete(medico)
+    db.session.commit()
+    return redirect(url_for('medico.listar_medicos'))

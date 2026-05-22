@@ -1,3 +1,4 @@
+import os
 from flask import render_template
 from config import app, db
 from controllers.medico_controller import medico_bp

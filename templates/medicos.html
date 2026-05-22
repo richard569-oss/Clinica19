@@ -8,6 +8,7 @@
         <th>Especialidad</th>
         <th>Teléfono</th>
         <th>Correo</th>
+        <th>Acciones</th>
     </tr>
     {% for m in medicos %}
     <tr>
@@ -15,6 +16,15 @@
         <td>{{ m.especialidad }}</td>
         <td>{{ m.telefono }}</td>
         <td>{{ m.correo }}</td>
+        <td>
+            <!-- Botón Editar -->
+            <a href="{{ url_for('medico.editar_medico', id=m.id_medico) }}">Editar</a>
+            
+            <!-- Botón Eliminar -->
+            <form action="{{ url_for('medico.eliminar_medico', id=m.id_medico) }}" method="post" style="display:inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>
